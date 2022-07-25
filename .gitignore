@@ -1,0 +1,14 @@
+*.pyc
+/build
+/dist
+/wagtail_qrcode.egg-info
+/.coverage
+/htmlcov
+/.tox
+/venv
+/.vscode
+/site
+/test_wagtail_qrcode.db
+/node_modules
+/test-static
+/test-media
