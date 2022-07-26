@@ -3,6 +3,7 @@ from django.db import models
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
+
 from wagtail_qrcode.field_panels import QrCodeSVGFieldPanel, QrCodeSVGUsageFieldPanel
 
 ImageModel = get_image_model()

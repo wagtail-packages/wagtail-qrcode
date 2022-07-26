@@ -159,3 +159,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "test-media")
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "Wagtail qrcode test site"
+
+WAGTAILADMIN_BASE_URL = ""
