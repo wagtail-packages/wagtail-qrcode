@@ -7,11 +7,14 @@ test:
 lint:
 	pre-commit run --all-files
 
-add:
+ga:
 	git add .
 
-commit:
+gc:
 	git commit
+
+gl:
+	git log --oneline
 
 push:
 	git push
