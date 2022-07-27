@@ -13,3 +13,8 @@
 /test-static
 /test-media
 .venv
+/db.sqlite3
+/sandbox
+/manage.py
+/media
+/static

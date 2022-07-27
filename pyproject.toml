@@ -45,8 +45,12 @@ build-backend = "poetry.masonry.api"
 [tool.black]
 line_length = 120
 target-version = ["py39"]
-include = "wagtail_qrcode"
+include = ["**/*.py"]
 
 [tool.isort]
 profile = "black"
-src_paths=["wagtail_qrcode", "testmanage.py"]
+src_paths=["wagtail_qrcode", "create.py"]
+
+[tool.poetry.scripts]
+create = "create:make_sandbox"
+remove = "create:delete_sandbox"
