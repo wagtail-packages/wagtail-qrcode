@@ -1,28 +1,19 @@
 #!/usr/bin/env python
 
-from os import path
-
 from setuptools import find_packages, setup
-
-from wagtail_qrcode import __version__
-
-
-this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
-    long_description = f.read()
 
 setup(
     name="wagtail-qrcode",
-    version=__version__,
+    version="0.1.0",
     description="Create a QR code that can be used to link to a wagtail page",
-    long_description=long_description,
-    long_description_content_type='text/markdown',
+    long_description="### A long description",
+    long_description_content_type="text/markdown",
     author="Nick Moreton",
     author_email="nickmoreton@me.com",
-    url="",
+    url="https://github.com/nickmoreton/wagtail-qrcode",
     packages=find_packages(),
     include_package_data=True,
-    license="BSD",
+    license="MIT",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
@@ -30,19 +21,17 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Framework :: Django",
-        "Framework :: Django :: 3.0",
-        "Framework :: Django :: 3.1",
         "Framework :: Django :: 3.2",
+        "Framework :: Django :: 4.0",
         "Framework :: Wagtail",
-        "Framework :: Wagtail :: 2",
+        "Framework :: Wagtail :: 3",
     ],
-    install_requires=["Django>=3.0,<4.0", "Wagtail>=2.14,<2.16"],
+    install_requires=["Django>=3.2", "Wagtail>=3.0", "PyQRCode>=1.2.1"],
     extras_require={
-        "testing": ["dj-database-url==0.5.0", "freezegun==0.3.15"],
+        "testing": [],
     },
     zip_safe=False,
 )
