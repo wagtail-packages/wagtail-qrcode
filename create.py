@@ -15,6 +15,7 @@ def delete_sandbox():
     subprocess.call("rm -rf sandbox".split())
     subprocess.call("rm manage.py".split())
     subprocess.call("rm db.sqlite3".split())
+    subprocess.call("rm -rf media".split())
 
 
 def clean_sandbox():
@@ -56,3 +57,4 @@ def copy_files():
     subprocess.call("touch sandbox/home/management/__init__.py".split())
     subprocess.call("touch sandbox/home/management/commands/__init__.py".split())
     subprocess.call("cp bin/commands/setup.py sandbox/home/management/commands/setup.py".split())
+    # subprocess.call("cp bin/settings/local.py sandbox/settings/local.py".split())
