@@ -43,7 +43,7 @@ requires = ["poetry>=1,<2"]
 build-backend = "poetry.masonry.api"
 
 [tool.black]
-line_length = 120
+line_length = 88
 target-version = ["py39"]
 include = ["**/*.py"]
 
