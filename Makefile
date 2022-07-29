@@ -12,4 +12,7 @@ run:
 test:
 	python manage.py test
 
-all: migrate test admin run
+setup:
+	python manage.py setup
+
+all: migrate test admin setup run
