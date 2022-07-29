@@ -75,8 +75,7 @@ def send_qr_code_email(page, eps_io):
         to=[page.qr_code_eps_email],
         attachments=[("qr-code-{}.eps".format(page.id), eps_io.getvalue())],
     )
-    sent = email.send()
-    print(sent)
+    email.send()
 
 
 def create_qr_code_document(page, collection, eps_io, document_title):
