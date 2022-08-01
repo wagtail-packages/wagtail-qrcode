@@ -52,5 +52,6 @@ profile = "black"
 src_paths=["wagtail_qrcode", "create.py"]
 
 [tool.poetry.scripts]
-create = "create:make_sandbox"
-remove = "create:delete_sandbox"
+develop = "scripts:develop"
+clean = "scripts:clean"
+test-scripts = "scripts:test_scripts"
