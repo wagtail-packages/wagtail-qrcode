@@ -12,16 +12,18 @@ from wagtail.models import Collection
 Image = get_image_model()
 Document = get_document_model()
 
-if not hasattr(settings, "WAGTAIL_QR_CODE"):
-    QRCODE_SETTINGS = {
-        "collection_name": "QR Codes",
-        "scale": 3,
-        "quite_zone": 6,
-        "svg_has_xml_declaration": False,
-        "svg_has_doc_type_declaration": False,
-    }
-else:
-    QRCODE_SETTINGS = settings.WAGTAIL_QR_CODE
+
+def get_settings():
+    if not hasattr(settings, "WAGTAIL_QR_CODE"):
+        return {
+            "collection_name": "QR Codes",
+            "scale": 3,
+            "quite_zone": 6,
+            "svg_has_xml_declaration": False,
+            "svg_has_doc_type_declaration": False,
+        }
+    else:
+        return settings.WAGTAIL_QR_CODE
 
 
 @hooks.register("after_create_page")
@@ -31,7 +33,7 @@ def generate_qr_code(request, page):
 
     title = page.title
     base_url = get_base_url(request)
-    collection = create_qrcode_collection(QRCODE_SETTINGS["collection_name"])
+    collection = create_qrcode_collection(get_settings()["collection_name"])
 
     # QR Code instance
     qrc = pyqrcode.create(f"{base_url}qrcode-redirect?id={page.id}")
@@ -67,7 +69,8 @@ def create_qrcode_collection(name="QR Codes"):
 
 def send_qr_code_email(page, eps_io):
     """Send the QR code to the email address."""
-
+    # need to add some error logging here
+    # see mailhog `jim` setting, he messes things up and make errors fo you.
     email = EmailMessage(
         subject=f"QR Code for {page.title}",
         body=f"QR Code for {page.title}",
@@ -87,7 +90,7 @@ def create_qr_code_document(page, collection, eps_io, document_title):
         doc.delete()
 
     doc = Document(
-        title=f"QR Code for {page.title}",
+        title=document_title,
         file=File(eps_io, name=f"qr-code-{page.id}.eps"),
         collection=collection,
     )
@@ -101,8 +104,8 @@ def make_qr_code_eps(qrc):
     eps_io = io.StringIO()
     qrc.eps(
         eps_io,
-        scale=QRCODE_SETTINGS["scale"],
-        quiet_zone=QRCODE_SETTINGS["quite_zone"],
+        scale=get_settings()["scale"],
+        quiet_zone=get_settings()["quite_zone"],
     )
 
     return eps_io
@@ -114,10 +117,10 @@ def make_svg_qr_code(title, qrc):
     svg_io = io.BytesIO()
     qrc.svg(
         svg_io,
-        scale=QRCODE_SETTINGS["scale"],
-        quiet_zone=QRCODE_SETTINGS["quite_zone"],
-        xmldecl=QRCODE_SETTINGS["svg_has_xml_declaration"],
-        svgns=QRCODE_SETTINGS["svg_has_doc_type_declaration"],
+        scale=get_settings()["scale"],
+        quiet_zone=get_settings()["quite_zone"],
+        xmldecl=get_settings()["svg_has_xml_declaration"],
+        svgns=get_settings()["svg_has_doc_type_declaration"],
         title=title,
     )
     svg_io = svg_io.getvalue().decode()

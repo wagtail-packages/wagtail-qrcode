@@ -1,19 +1,19 @@
 .PHONY: all lint migrate test run
 
 migrate:
-	python manage.py migrate
+	python sandbox/manage.py migrate
 
 admin:
-	echo "from django.contrib.auth import get_user_model; get_user_model().objects.create_superuser('admin', '', 'changeme')" | python manage.py shell
+	echo "from django.contrib.auth import get_user_model; get_user_model().objects.create_superuser('admin', '', 'changeme')" | python sandbox/manage.py shell
 
 run:
-	python manage.py runserver
+	python sandbox/manage.py runserver
 
 test:
-	python manage.py test
+	python testmanage.py test
 
 setup:
-	python manage.py setup
+	python sandbox/manage.py migrate && python sandbox/manage.py setup
 
 mail:
 	cp bin/settings/local.py sandbox/settings/local.py
