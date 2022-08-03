@@ -9,9 +9,9 @@ Simply send the QR code to a printer or use the EPS file at an online printing s
 ## Under development
 
 Todo:
-- add tests
-- add sandbox app models
-- add documentation
+- [ ] add tests
+- [ ] add sandbox app models
+- [ ] add documentation
 
 ## Installation
 
