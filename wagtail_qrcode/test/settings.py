@@ -118,7 +118,7 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
     {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
@@ -160,4 +160,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "test-media")
 
 WAGTAIL_SITE_NAME = "Wagtail qrcode test site"
 
-WAGTAILADMIN_BASE_URL = ""
+WAGTAILADMIN_BASE_URL = "http://localhost:8000"

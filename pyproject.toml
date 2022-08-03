@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "wagtail_qrcode"
+version = "0.1.0"
+description = "Create a QR code that can be used to link to a wagtail page"
+authors = ["Nick Moreton"]
+repository = "https://github.com/nickmoreton/wagtail-qrcode"
+keywords = ["wagtail", "qrcode"]
+packages = [
+    { include = "wagtail_qrcode" }
+]
+include = ["wagtail_qrcode/*"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 3",
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+wagtail = "^3.0.1"
+PyQRCode = "^1.2.1"
+
+[tool.poetry.extras]
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+pre-commit = "^2.20.0"
+
+[build-system]
+requires = ["poetry>=1,<2"]
+build-backend = "poetry.masonry.api"
+
+[tool.black]
+line_length = 88
+target-version = ["py39"]
+include = ["**/*.py"]
+
+[tool.isort]
+profile = "black"
+src_paths=["wagtail_qrcode", "create.py"]
+
+[tool.poetry.scripts]
+develop = "scripts:develop"
+clean = "scripts:clean"
+test-scripts = "scripts:test_scripts"
