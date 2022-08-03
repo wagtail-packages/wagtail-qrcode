@@ -1,97 +1,57 @@
-import io
-import tempfile
-
-import pyqrcode
-from django.core.files.base import File
-from django.test import TestCase, override_settings
-from django.test.client import RequestFactory
-from wagtail.documents.models import Document
-from wagtail.models import Collection, Page
+from django.conf import settings
+from django.core import mail
+from django.test import RequestFactory, TestCase
+from wagtail.documents import get_document_model
+from wagtail.models import Page
 
 from wagtail_qrcode.test.models import TestPage
 from wagtail_qrcode.wagtail_hooks import (
-    create_qr_code_document,
-    create_qrcode_collection,
-    delete_eps_qrcode_from_documents,
-    get_base_url,
-    get_settings,
-    make_qr_code_eps,
-    make_svg_qr_code,
+    delete_document,
+    generate_qr_code,
+    send_qr_code_email,
 )
 
 
 class TestWagtailHooks(TestCase):
-    def test_make_svg_qr_code(self):
-        qr_code = pyqrcode.create("http://example.com/qrcode?id=1")
-        svg_io = make_svg_qr_code("qr code", qr_code)
-        self.assertIsInstance(svg_io, str)
-
-    def test_make_qr_code_eps(self):
-        qr_code = pyqrcode.create("http://example.com/qrcode?id=1")
-        eps_io = make_qr_code_eps(qr_code)
-        self.assertIsInstance(eps_io, io.StringIO)
-
-    def test_create_qr_code_document(self):
-        collection = create_qrcode_collection()
-        doc = create_qr_code_document(
-            page=Page(title="Foo Page"),
-            collection=collection,
-            eps_io=io.BytesIO(b"foo"),
-            document_title="QR Code for Foo Page",
-        )
-        document = Document.objects.get(title="QR Code for Foo Page")
-        self.assertEqual(doc, document)
-
-    def test_create_qrcode_collection(self):
-        collection = create_qrcode_collection()
-        self.assertIsInstance(collection, Collection)
-        self.assertEqual(collection.name, "QR Codes")
-
-    def test_qr_code_settings_default(self):
-        expected_settings = {
-            "collection_name": "QR Codes",
-            "scale": 3,
-            "quite_zone": 6,
-            "svg_has_xml_declaration": False,
-            "svg_has_doc_type_declaration": False,
-        }
-        self.assertEqual(get_settings(), expected_settings)
-
-    @override_settings(WAGTAIL_QR_CODE={"collection_name": "foo codes"})
-    def test_qr_code_settings_overide(self):
-        self.assertEqual(get_settings()["collection_name"], "foo codes")
-
-    def test_get_base_url(self):
+    def test_generate_qr_code(self):
         request = RequestFactory().get("/")
-        self.assertEqual(get_base_url(request), "http://testserver/")
+        page = TestPage(title="Test Page")
 
-    @override_settings(QRCODE_BASE_URL="http://foo.com/")
-    def test_get_base_url_override(self):
-        self.assertEqual(get_base_url({}), "http://foo.com/")
+        self.assertEqual(page.qr_code_svg, None)
+        self.assertEqual(page.qr_code_eps, None)
+        self.assertEqual(page.qr_code_eps_email, None)
+        self.assertEqual(page.qr_code_usage, 0)
 
-    def test_delete_eps_from_documents(self):
-        with tempfile.TemporaryFile() as f:
-            # make a couple of documents
-            f.write(b"content")
-            Document(title="Foo", file=File(f, name="foo.eps")).save()
-            Document(title="Bar", file=File(f, name="bar.eps")).save()
+        root_page = Page.objects.get(id=1)
+        home_page = root_page.get_children().first()
+        home_page.add_child(instance=page)
 
-        self.assertEqual(Document.objects.count(), 2)
-
-        # the document that will be linked to the page
-        document_linked = Document.objects.get(title="Foo")
-
-        # add a test page that inherits from QRCodeMixin
-        root = Page.objects.get(id=1)
-        home_page = root.get_children().first()
-        fake_page = TestPage(title="Test Page", qr_code_eps=document_linked)
-        home_page.add_child(instance=fake_page)
-        rev = fake_page.save_revision()
+        rev = page.save_revision()
         rev.publish()
 
-        request = RequestFactory().get("/")
+        test_page = TestPage.objects.get(id=page.id)
 
-        # delete the eps file linked to fale_page from the documents
-        delete_eps_qrcode_from_documents(request, fake_page)
-        self.assertEqual(Document.objects.count(), 1)
-        self.assertEqual(Document.objects.first().title, "Bar")
+        generate_qr_code(request, test_page)
+
+        self.assertEqual(test_page.qr_code_svg[:4], "<svg")
+        self.assertEqual(test_page.qr_code_eps.id, 1)
+        self.assertEqual(test_page.qr_code_eps_email, None)
+        self.assertEqual(test_page.qr_code_usage, 0)
+
+        test_page.qr_code_eps_email = "test@test.com"
+        rev = test_page.save_revision()
+        rev.publish()
+
+        send_qr_code_email(test_page)
+
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].subject, "QR Code for Test Page")
+        self.assertEqual(mail.outbox[0].body, "QR Code for Test Page")
+        self.assertEqual(mail.outbox[0].from_email, settings.DEFAULT_FROM_EMAIL)
+        self.assertEqual(mail.outbox[0].to, ["test@test.com"])
+        self.assertEqual(
+            mail.outbox[0].attachments[0][0], "qr-code-{}.eps".format(test_page.id)
+        )
+
+        delete_document(request, test_page)
+        self.assertEqual(get_document_model().objects.count(), 0)

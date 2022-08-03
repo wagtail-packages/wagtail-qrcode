@@ -4,25 +4,27 @@ import subprocess
 from pathlib import Path
 
 
-def make_sandbox():
-    subprocess.call("wagtail start sandbox".split())
-    clean_sandbox()
-    configure_sandbox()
-    copy_files()
+def develop():
+    if not Path("sandbox").exists():
+        subprocess.call("wagtail start sandbox".split())
+        clean_sandbox()
+        configure_sandbox()
+        copy_files()
+    else:
+        print("Sandbox already exists: run `remove` to delete it")
 
 
-def delete_sandbox():
+def clean():
     subprocess.call("rm -rf sandbox".split())
-    # subprocess.call("rm manage.py".split())
     subprocess.call("rm db.sqlite3".split())
     subprocess.call("rm -rf media".split())
+    subprocess.call("rm -rf test-media".split())
 
 
 def clean_sandbox():
     subprocess.call("rm -rf sandbox/.dockerignore".split())
     subprocess.call("rm -rf sandbox/Dockerfile".split())
     subprocess.call("rm -rf sandbox/requirements.txt".split())
-    # subprocess.call("mv sandbox/manage.py .".split())
     subprocess.call("mv sandbox/sandbox/settings sandbox".split())
     subprocess.call("mv sandbox/sandbox/static sandbox".split())
     subprocess.call("mv sandbox/sandbox/templates sandbox".split())
@@ -75,4 +77,35 @@ def copy_files():
     subprocess.call(
         "cp bin/commands/setup.py sandbox/home/management/commands/setup.py".split()
     )
-    # subprocess.call("cp bin/settings/local.py sandbox/settings/local.py".split())
+
+
+def test_scripts():
+    confirm = input(
+        """DESTRUCTION IS IMMINENT!\n
+        This will delete the sandbox directory and any data you have created.\n
+        Continue? [y/N] """
+    )
+    result = []
+    if confirm == "y":
+
+        develop()
+
+        if Path("sandbox").exists():
+            result.append(True)
+        else:
+            result.append(False)
+
+        clean()
+        if not Path("sandboxs").exists():
+            result.append(True)
+        else:
+            result.append(False)
+
+        if all(result):
+            print("SUCCESS! All tests passed")
+        else:
+            print("ERROR! Some tests failed")
+            exit(1)
+
+    else:
+        print("ABORTED")
