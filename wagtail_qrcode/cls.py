@@ -4,7 +4,6 @@ import pyqrcode
 from django.conf import settings
 from django.core.files.base import File
 
-# from django.core.mail import EmailMessage
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Collection
