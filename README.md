@@ -1,17 +1,12 @@
 # Wagtail qrcode
 
-This package can be used to create a page in Wagtail CMS that has a corresponding QR Code that can be printed then scanned and will link to the page.
-
-You can download the generated QR code as a print ready EPS file that can be added to posters, postcards, banners, beer mats and more.
-
-Simply send the QR code to a printer or use the EPS file at an online printing service.
-
 ## Under development
 
-Todo:
-- [ ] add tests
-- [ ] add sandbox app models
-- [ ] add documentation
+This package can be used to create a page in Wagtail CMS that has a corresponding QR Code.
+
+The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page.
+
+You can download the generated QR code and use it in printed advertising like posters, postcards, banners, beer mats and more.
 
 ## Installation
 
@@ -33,21 +28,57 @@ INSTALLED_APPS = [
 ]
 ```
 
-## CMS setup
+## Using the QRCode page model mixin
 
-- about the page model mixin.
-- about the content editor usage.
-- about downloading the QR code
+Add the model mixin to a new or an existing page model.
+
+```python
+class QRCodePage(QRCodeMixin, Page):
+    # other model fields ...
+
+    edit_handler = TabbedInterface(
+        [
+            ObjectList(Page.content_panels, heading="Content"),
+            ObjectList(Page.promote_panels, heading="Promote"),
+            ObjectList(Page.settings_panels, heading="Settings", classname="settings"),
+            ObjectList(QRCodeMixin.panels, heading="QR Code", classname="qr-code"),
+        ]
+    )
+```
+
+This will add a new tab in the page editor `QR Code` where you can preview the generated QR code and access the downloadable print ready EPS file. (the file can also be found in the documents app)
+
+## Configuration
+
+Set the base url for the generated QR code
+
+```python
+WAGTAILADMIN_BASE_URL = "http://example.com"
+```
+
+Set the configuration (optional, these are the defaults)
+
+```python
+WAGTAIL_QR_CODE={
+    "collection_name": "QR Codes",
+    "scale": 3,
+    "quite_zone": 6,
+    "svg_has_xml_declaration": False,
+    "svg_has_doc_type_declaration": False,
+}
+```
 
 ## Contributing
 
 Development setup
 
-**First clone this repo to a folder on your computer.**
+**First clone this repo to your computer.**
 
 ```bash
 git clone https://github.com/nickmoreton/wagtail-qrcode
 ```
+
+### Poetry environnment
 
 **Use [Poetry](https://python-poetry.org) for dependency installation & environment management.**
 
@@ -56,19 +87,19 @@ poetry install
 poetry shell
 ```
 
-**Create a development app** (optional & requires poetry environment ^^ to be activated)
+**Create the development app** (requires poetry environment ^^ to be activated)
 
 ```bash
-create
+develop
 ```
 
-**Run the development setup**
+and run the following
 
 ```bash
 make all
 ```
 
-This will install a Wagtail app that can be used to test your new features. The app can be viewed at <http://localhost:8000>
+This will install a Wagtail app that can be used to develop the package. The app can be viewed at <http://localhost:8000>
 
 You can log into the admin at <http://localhost:8000/admin> and use `admin` for the username & `changeme` for the password.
 
@@ -76,13 +107,12 @@ You can log into the admin at <http://localhost:8000/admin> and use `admin` for 
 
 You can use the commands in the Make file to conveininetly run various commands.
 
-- `make migrate` run the django migrations
-- `make run` run the django development server
-- `make test` run the django tests
-- `make admin` create and admin user account. UN: `admin` PW: `changeme`
+- `make migrate` run migrations
+- `make run` run the development server
+- `make test` run the tests
 
 Although it not required as the sandbox app is ignored by git you can remove the development app by running.
 
 ```bash
-remove
+clean
 ```
