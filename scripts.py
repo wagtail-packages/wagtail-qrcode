@@ -64,6 +64,7 @@ def configure_sandbox():
 
 
 def copy_files():
+    subprocess.call("cp bin/settings/dev.py sandbox/settings/dev.py".split())
     subprocess.call(
         "cp bin/migrations/0003_qrcodepage.py sandbox/home/migrations/0003_qrcodepage.py".split()  # noqa: E501
     )
