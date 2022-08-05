@@ -12,7 +12,4 @@ services:
     image: mailhog/mailhog
     ports:
       - "8025:8025"
-    volumes:
-      - .:/app
-    links:
-      - app
+      - "1025:1025"

@@ -33,3 +33,9 @@ down:
 
 sh:
 	docker-compose exec app bash
+
+start:
+	docker-compose up -d && docker-compose exec app poetry run make develop && docker-compose exec app poetry run make all
+
+destroy:
+	docker-compose up -d && docker-compose exec app poetry run clean
