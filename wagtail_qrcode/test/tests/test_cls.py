@@ -2,6 +2,7 @@ import io
 import tempfile
 
 import pyqrcode
+from django.conf import settings
 from django.core.files.base import File
 from django.test import TestCase, override_settings
 from wagtail.documents import get_document_model
@@ -34,6 +35,8 @@ class TestWagtailQrCode(TestCase):
         self.assertEqual(instance.settings["svg_has_xml_declaration"], False)
         self.assertIsInstance(instance.settings["svg_has_doc_type_declaration"], bool)
         self.assertEqual(instance.settings["svg_has_doc_type_declaration"], False)
+
+        self.assertIsInstance(settings.WAGTAIL_QR_CODE_BASE_URL, str)
 
     @override_settings(
         WAGTAIL_QR_CODE={
@@ -150,7 +153,6 @@ class TestWagtailQrCode(TestCase):
     def test_build(self):
         collection = create_collection("Foo Collection")
         instance = WagtailQrCode(self.test_page, collection)
-        svg, eps, document = instance.build()
+        svg, document = instance.build()
         self.assertIsInstance(svg, str)
-        self.assertIsInstance(eps, io.StringIO)
-        self.assertIsNotNone(eps.getvalue())
+        self.assertIsInstance(document, Document)

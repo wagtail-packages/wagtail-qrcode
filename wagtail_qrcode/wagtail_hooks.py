@@ -15,13 +15,13 @@ def generate_qr_code(request, page):
 
     qrc = WagtailQrCode(page, collection)
 
-    svg, eps, document = qrc.build()
+    svg, document = qrc.build()
 
     page.qr_code_svg = svg
     page.qr_code_eps = document
 
     if page.qr_code_eps_email is not None:
-        send_qr_code_email(page, eps)
+        send_qr_code_email(page)
         page.qr_code_eps_email = ""
 
     rev = page.save_revision()
@@ -42,7 +42,10 @@ def send_qr_code_email(page):
         to=[email],
         attachments=[("qr-code-{}.eps".format(page.id), doc.file.read(), "image/eps")],
     )
-    email.send()
+    try:
+        email.send()
+    except Exception as e:
+        print(e)
 
 
 @hooks.register("after_delete_page")

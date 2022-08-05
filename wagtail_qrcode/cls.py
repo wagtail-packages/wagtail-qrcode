@@ -3,7 +3,6 @@ import io
 import pyqrcode
 from django.conf import settings
 from django.core.files.base import File
-
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Collection
@@ -41,7 +40,7 @@ class WagtailQrCode:
             base_url = settings.WAGTAILADMIN_BASE_URL
 
         # QR Code instance
-        qrc = self.make_qr_code(f"{base_url}/qrcode?id={self.page.id}")
+        qrc = self.make_qr_code(f"{base_url}/qr-code?id={self.page.id}")
 
         # SVG QR code
         svg = self.make_svg(qrc)
@@ -50,7 +49,7 @@ class WagtailQrCode:
         eps = self.make_eps(qrc)
         document = self.make_document(title, eps, self.collection)
 
-        return svg, eps, document
+        return svg, document
 
     def make_qr_code(self, content):
         qrc = pyqrcode.create(content)
