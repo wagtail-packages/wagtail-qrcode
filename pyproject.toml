@@ -37,6 +37,7 @@ black = "^22.6.0"
 flake8 = "^4.0.1"
 isort = "^5.10.1"
 pre-commit = "^2.20.0"
+tox = "^3.25.1"
 
 [build-system]
 requires = ["poetry>=1,<2"]
