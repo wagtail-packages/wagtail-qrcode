@@ -1,6 +1,12 @@
 from django import forms
 from django.db import models
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+else:
+    from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 

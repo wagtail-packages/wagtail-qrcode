@@ -1,6 +1,11 @@
 from django.test import TestCase
 from django.test.client import RequestFactory
-from wagtail.models import Page
+from wagtail import VERSION as WAGTAIL_VERSION
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import Page
+else:
+    from wagtail.core.models import Page
 
 from wagtail_qrcode.views import qr_code_page_view
 

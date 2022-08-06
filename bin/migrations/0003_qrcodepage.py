@@ -30,7 +30,10 @@ class Migration(migrations.Migration):
                 (
                     "qr_code_svg",
                     models.TextField(
-                        blank=True, help_text="The QR code SVG sample.", null=True, verbose_name="QR Code SVG"
+                        blank=True,
+                        help_text="The QR code SVG sample.",
+                        null=True,
+                        verbose_name="QR Code SVG",
                     ),
                 ),
                 (

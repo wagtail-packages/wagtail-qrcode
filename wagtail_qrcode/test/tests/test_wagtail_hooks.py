@@ -1,8 +1,13 @@
 from django.conf import settings
 from django.core import mail
 from django.test import RequestFactory, TestCase
+from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.documents import get_document_model
-from wagtail.models import Page
+
+if WAGTAIL_VERSION >= (3, 0):
+    from wagtail.models import Page
+else:
+    from wagtail.core.models import Page
 
 from wagtail_qrcode.test.models import TestPage
 from wagtail_qrcode.wagtail_hooks import (

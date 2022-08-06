@@ -2,16 +2,23 @@
 
 import django.db.models.deletion
 from django.db import migrations, models
+from wagtail import VERSION as WAGTAIL_VERSION
 
 
 class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ("wagtailcore", "0069_log_entry_jsonfield"),
-        ("wagtaildocs", "0012_uploadeddocument"),
-    ]
+    if WAGTAIL_VERSION >= (3, 0):
+        dependencies = [
+            ("wagtailcore", "0069_log_entry_jsonfield"),
+            ("wagtaildocs", "0012_uploadeddocument"),
+        ]
+    else:
+        dependencies = [
+            ("wagtailcore", "0066_collection_management_permissions"),
+            ("wagtaildocs", "0012_uploadeddocument"),
+        ]
 
     operations = [
         migrations.CreateModel(
