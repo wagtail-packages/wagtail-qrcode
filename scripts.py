@@ -11,7 +11,7 @@ def develop():
         configure_sandbox()
         copy_files()
     else:
-        print("Sandbox already exists: run `remove` to delete it")
+        print("Sandbox already exists: run `clean` to delete it")
 
 
 def clean():

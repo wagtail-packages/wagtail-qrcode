@@ -13,7 +13,7 @@ class QrCodeSVGFieldPanel(FieldPanel):
             object_template_name = "wagtail_qrcode/admin/qr_code_svg_field_panel.html"
 
     else:
-        object_template_name = "wagtail_qrcode/admin/qr_code_svg_field_panel.html"
+        object_template = "wagtail_qrcode/admin/qr_code_svg_field_panel.html"
 
 
 class QrCodeSVGUsageFieldPanel(FieldPanel):
@@ -25,4 +25,4 @@ class QrCodeSVGUsageFieldPanel(FieldPanel):
             )
 
     else:
-        object_template_name = "wagtail_qrcode/admin/qr_code_svg_usage_field_panel.html"
+        object_template = "wagtail_qrcode/admin/qr_code_svg_usage_field_panel.html"

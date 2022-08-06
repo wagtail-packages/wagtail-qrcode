@@ -28,11 +28,25 @@ INSTALLED_APPS = [
 ]
 ```
 
-## Using the QRCode page model mixin
+**Add this setting to your Wagtail settings.** 
 
-Add the model mixin to a new or an existing page model.
+It is used to generate the base url for the QR code
 
 ```python
+WAGTAIL_QR_CODE_BASE_URL = "your-site-site-url"
+```
+
+## Using the QRCode page model mixin
+
+Use the model mixin in a new or an existing page model.
+
+```python
+
+from wagtail.admin.edit_handlers import TabbedInterface, ObjectList # Wagtail <= 2.*.*
+from wagtail.admin.panels import TabbedInterface, ObjectList # Wagtail >= 3.*.*
+
+from wagtail_qrcode.models import QRCodeMixin
+
 class QRCodePage(QRCodeMixin, Page):
     # other model fields ...
 
