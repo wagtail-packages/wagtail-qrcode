@@ -2,11 +2,20 @@
 
 ## Under development
 
+These are the features not yet completed.
+
+- Counting qr-code scans
+- Expand the documentation
+
+---
+
 This package can be used to create a page in Wagtail CMS that has a corresponding QR Code.
 
 The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page.
 
 You can download the generated QR code and use it in printed advertising like posters, postcards, banners, beer mats and more.
+
+When saving a draft or publishing a page you can add an email address to send the qr-code to as an attachment.
 
 ## Installation
 
@@ -62,6 +71,32 @@ class QRCodePage(QRCodeMixin, Page):
 
 This will add a new tab in the page editor `QR Code` where you can preview the generated QR code and access the downloadable print ready EPS file. (the file can also be found in the documents app)
 
+## Wagtail QRCode URLS
+
+You should include the wagtail-qrcode urls in your site urls.
+
+The url provides the redirect endpoint when the qr-code is scanned.
+
+```python
+urlpatterns = [
+    ...
+    path("qr-code/", include("wagtail_qrcode.urls")),
+    ...
+]
+```
+
+or import the view and pass the view in the path function
+
+```python
+from wagtail_qrcode.views import qr_code_page_view
+
+urlpatterns = [
+    ...
+    path("qr-code/", qr_code_page_view, name="qr-code-view"),
+    ...
+]
+```
+
 ## Configuration
 
 Set the base url for the generated QR code
@@ -101,32 +136,41 @@ poetry install
 poetry shell
 ```
 
-**Create the development app** (requires poetry environment ^^ to be activated)
+**Create the development app** (requires poetry environment ^^ to be activated) run the poetry script
 
 ```bash
 develop
 ```
 
-and run the following
+To build a development app run
 
 ```bash
 make all
 ```
 
-This will install a Wagtail app that can be used to develop the package. The app can be viewed at <http://localhost:8000>
+This will create a Wagtail app that can be used to develop the package. The app can be viewed at <http://localhost:8000>
 
 You can log into the admin at <http://localhost:8000/admin> and use `admin` for the username & `changeme` for the password.
 
 ### Other commands
 
-You can use the commands in the Make file to conveininetly run various commands.
+You can use the commands in the Make file to conveniently run various commands.
 
 - `make migrate` run migrations
 - `make run` run the development server
 - `make test` run the tests
+- `make admin` to quickly setup a superuser account with the above login details.
+- `make run` to run the django development server
+- `make test` to run the django tests
+- `make mail` to run a docker container for `MailHog`
 
-Although it not required as the sandbox app is ignored by git you can remove the development app by running.
+Although it not required as the sandbox app is ignored by git you can remove the development app and files by running.
 
 ```bash
 clean
 ```
+
+## Testing
+
+The app has django tests and has `tox` setup for running them against the compatible Wagtail and Django versions. Tox testing is also run when pushing branches to GitHub in the GitHub actions scripts.
+
