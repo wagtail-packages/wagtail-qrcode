@@ -9,6 +9,8 @@ These are the features not yet completed.
 
 ---
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/nickmoreton/wagtail-qrcode/main.svg)](https://results.pre-commit.ci/latest/github/nickmoreton/wagtail-qrcode/main)
+
 This package can be used to create a page in Wagtail CMS that has a corresponding QR Code.
 
 The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page.
