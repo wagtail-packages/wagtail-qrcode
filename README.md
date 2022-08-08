@@ -101,12 +101,6 @@ urlpatterns = [
 
 ## Configuration
 
-Set the base url for the generated QR code
-
-```python
-WAGTAILADMIN_BASE_URL = "http://example.com"
-```
-
 Set the configuration (optional, these are the defaults)
 
 ```python
@@ -148,6 +142,12 @@ To build a development app run
 
 ```bash
 make all
+```
+
+To run the development app
+
+```bash
+make run
 ```
 
 This will create a Wagtail app that can be used to develop the package. The app can be viewed at <http://localhost:8000>
