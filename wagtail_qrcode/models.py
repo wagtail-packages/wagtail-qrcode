@@ -1,5 +1,5 @@
-from django import forms
 from django.db import models
+from django import forms
 from wagtail import VERSION as WAGTAIL_VERSION
 
 if WAGTAIL_VERSION >= (3, 0):
