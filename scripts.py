@@ -19,6 +19,9 @@ def clean():
     subprocess.call("rm db.sqlite3".split())
     subprocess.call("rm -rf media".split())
     subprocess.call("rm -rf test-media".split())
+    subprocess.call("rm -rf .tox".split())
+    subprocess.call("rm -rf htmlcov".split())
+    subprocess.call("rm .coverage".split())
 
 
 def clean_sandbox():

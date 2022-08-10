@@ -39,6 +39,7 @@ isort = "^5.10.1"
 pre-commit = "^2.20.0"
 tox = "^3.25.1"
 pymarkdownlnt = "^0.9.7"
+coverage = "^6.4.3"
 
 [build-system]
 requires = ["poetry>=1,<2"]

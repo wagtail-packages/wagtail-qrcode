@@ -121,6 +121,17 @@ toolz = "*"
 wcwidth = "*"
 
 [[package]]
+name = "coverage"
+version = "6.4.3"
+description = "Code coverage measurement for Python"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+toml = ["tomli"]
+
+[[package]]
 name = "distlib"
 version = "0.3.5"
 description = "Distribution utilities"
@@ -768,7 +779,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "830c86fd9be0d3b1f2c567bf25b934a13a182d4eae61b3ca87ac60c901e19f3d"
+content-hash = "8a5c197dc943781cfa48c3e1a21f688105ad898485b24ffaaebea005628abbc9"
 
 [metadata.files]
 anyascii = [
@@ -825,6 +836,7 @@ colorama = [
     {file = "colorama-0.4.5.tar.gz", hash = "sha256:e6c6b4334fc50988a639d9b98aa429a0b57da6e17b9a44f0451f930b6967b7a4"},
 ]
 columnar = []
+coverage = []
 distlib = []
 django = []
 django-filter = [
