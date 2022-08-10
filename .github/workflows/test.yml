@@ -25,7 +25,7 @@ jobs:
           pre-commit install
           pre-commit run --all-files
 
-  build:
+  test-python:
     runs-on: ubuntu-latest
     strategy:
       matrix:
