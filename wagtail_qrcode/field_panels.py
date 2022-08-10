@@ -6,23 +6,21 @@ else:
     from wagtail.admin.edit_handlers import FieldPanel
 
 
-class QrCodeSVGFieldPanel(FieldPanel):
+class QrCodeFieldPanel(FieldPanel):
     if WAGTAIL_VERSION >= (3, 0):
 
         class BoundPanel(FieldPanel.BoundPanel):
-            object_template_name = "wagtail_qrcode/admin/qr_code_svg_field_panel.html"
+            object_template_name = "wagtail_qrcode/admin/field_panel.html"
 
     else:
-        object_template = "wagtail_qrcode/admin/qr_code_svg_field_panel.html"
+        object_template = "wagtail_qrcode/admin/field_panel.html"
 
 
-class QrCodeSVGUsageFieldPanel(FieldPanel):
+class QrCodeUsageFieldPanel(FieldPanel):
     if WAGTAIL_VERSION >= (3, 0):
 
         class BoundPanel(FieldPanel.BoundPanel):
-            object_template_name = (
-                "wagtail_qrcode/admin/qr_code_svg_usage_field_panel.html"
-            )
+            object_template_name = "wagtail_qrcode/admin/usage_field_panel.html"
 
     else:
-        object_template = "wagtail_qrcode/admin/qr_code_svg_usage_field_panel.html"
+        object_template = "wagtail_qrcode/admin/usage_field_panel.html"

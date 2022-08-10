@@ -15,6 +15,14 @@ test:
 setup:
 	python sandbox/manage.py setup
 
+lint:
+	pre-commit run --all-files
+
+coverage:
+	coverage run --source=wagtail_qrcode testmanage.py test
+	coverage html
+	coverage report
+
 mail:
 	cp bin/settings/local.py sandbox/settings/local.py
 	docker run -p 8025:8025 -p 1025:1025 mailhog/mailhog

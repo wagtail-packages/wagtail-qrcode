@@ -11,4 +11,11 @@ repos:
     rev: 4.0.1
     hooks:
       - id: flake8
-      
+  - repo: https://github.com/jackdewinter/pymarkdown
+    rev: main
+    hooks:
+        - id: pymarkdown
+          args:
+              - --disable-rules
+              - line-length
+              - scan

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-**Add this setting to your Wagtail settings.** 
+**Add this setting to your Wagtail settings.**
 
 It is used to generate the base url for the QR code
 
@@ -175,4 +175,3 @@ clean
 ## Testing
 
 The app has django tests and has `tox` setup for running them against the compatible Wagtail and Django versions. Tox testing is also run when pushing branches to GitHub in the GitHub actions scripts.
-

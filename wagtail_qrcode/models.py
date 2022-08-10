@@ -10,7 +10,7 @@ else:
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 
-from wagtail_qrcode.field_panels import QrCodeSVGFieldPanel, QrCodeSVGUsageFieldPanel
+from wagtail_qrcode.field_panels import QrCodeFieldPanel, QrCodeUsageFieldPanel
 
 ImageModel = get_image_model()
 DocumentModel = get_document_model()
@@ -51,11 +51,11 @@ class QRCodeMixin(models.Model):
         abstract = True
 
     panels = [
-        QrCodeSVGUsageFieldPanel(
+        QrCodeFieldPanel(
             "qr_code_usage",
             widget=forms.HiddenInput(),
         ),
-        QrCodeSVGFieldPanel(
+        QrCodeUsageFieldPanel(
             "qr_code_svg",
             widget=forms.HiddenInput(),
         ),
