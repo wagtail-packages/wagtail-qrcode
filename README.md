@@ -1,23 +1,14 @@
 # Wagtail qrcode
 
-## Under development
-
-These are the features not yet completed.
-
-- Counting qr-code scans
-- Expand the documentation
-
----
-
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/nickmoreton/wagtail-qrcode/main.svg)](https://results.pre-commit.ci/latest/github/nickmoreton/wagtail-qrcode/main)
-
 This package can be used to create a page in Wagtail CMS that has a corresponding QR Code.
 
-The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page.
+![Alt text](docs/sample.jpg?raw=true "Title")
+
+The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page via the page ID
 
 You can download the generated QR code and use it in printed advertising like posters, postcards, banners, beer mats and more.
 
-When saving a draft or publishing a page you can add an email address to send the qr-code to as an attachment.
+When saving a draft or publishing a page you can add a one-time email address to send the qr-code to as an attachment.
 
 ## Installation
 
@@ -44,7 +35,7 @@ INSTALLED_APPS = [
 It is used to generate the base url for the QR code
 
 ```python
-WAGTAIL_QR_CODE_BASE_URL = "your-site-site-url"
+WAGTAIL_QR_CODE_BASE_URL = "your-site-url"
 ```
 
 ## Using the QRCode page model mixin
@@ -59,7 +50,7 @@ from wagtail.admin.panels import TabbedInterface, ObjectList # Wagtail >= 3.*.*
 from wagtail_qrcode.models import QRCodeMixin
 
 class QRCodePage(QRCodeMixin, Page):
-    # other model fields ...
+    # your model fields ...
 
     edit_handler = TabbedInterface(
         [
@@ -75,9 +66,9 @@ This will add a new tab in the page editor `QR Code` where you can preview the g
 
 ## Wagtail QRCode URLS
 
-You should include the wagtail-qrcode urls in your site urls.
+Include the wagtail-qrcode urls in your site urls.
 
-The url provides the redirect endpoint when the qr-code is scanned.
+The url provides the redirect endpoint for when the qr-code is scanned and viewed in a browser.
 
 ```python
 urlpatterns = [
@@ -112,6 +103,12 @@ WAGTAIL_QR_CODE={
     "svg_has_doc_type_declaration": False,
 }
 ```
+
+- collection_name: is automatically created and used as the collection for all generated QR codes
+- scale: the size of the dots in the QR code
+- quite_zone: the plain border around the QR code
+- svg_has_xml_declaration: does the QR code SVG have an XML declaration
+- svg_has_doc_type_declaration: does the QR code SVG have an HTML doc-type
 
 ## Contributing
 
@@ -164,9 +161,11 @@ You can use the commands in the Make file to conveniently run various commands.
 - `make admin` to quickly setup a superuser account with the above login details.
 - `make run` to run the django development server
 - `make test` to run the django tests
+- `make lint` to run pre-commit --all-files
+- `make coverage` to run a coverage report
 - `make mail` to run a docker container for `MailHog`
 
-Although it not required as the sandbox app is ignored by git you can remove the development app and files by running.
+Although it's not required as the sandbox app and temp files and folders created during testing are ignored by git you can remove these by running.
 
 ```bash
 clean
@@ -174,4 +173,6 @@ clean
 
 ## Testing
 
-The app has django tests and has `tox` setup for running them against the compatible Wagtail and Django versions. Tox testing is also run when pushing branches to GitHub in the GitHub actions scripts.
+The app has django tests and has `tox` setup for running them against the compatible Wagtail and Django versions.
+
+Tox is also run when pushing branches to GitHub in the GitHub actions scripts.

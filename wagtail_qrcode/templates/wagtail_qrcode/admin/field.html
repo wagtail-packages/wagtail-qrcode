@@ -9,10 +9,9 @@
             {% endif %}
             {% block form_field %}
                 {{ field|render_with_errors }}
+                {{ field.value|safe }}
             {% endblock %}
             
-            {{ field.value|safe }}
-
             {# This span only used on rare occasions by certain types of input #}
             <span></span>
         </div>

@@ -23,7 +23,6 @@ class QRCodeMixin(models.Model):
         verbose_name="QR Code SVG",
         blank=True,
         null=True,
-        help_text="The QR code SVG sample.",
     )
 
     qr_code_eps = models.ForeignKey(
@@ -44,7 +43,6 @@ class QRCodeMixin(models.Model):
     qr_code_usage = models.IntegerField(
         verbose_name="QR Code Usage Count",
         default=0,
-        help_text="The number of times the QR code has been used.",
     )
 
     class Meta:
@@ -52,11 +50,11 @@ class QRCodeMixin(models.Model):
 
     panels = [
         QrCodeFieldPanel(
-            "qr_code_usage",
+            "qr_code_svg",
             widget=forms.HiddenInput(),
         ),
         QrCodeUsageFieldPanel(
-            "qr_code_svg",
+            "qr_code_usage",
             widget=forms.HiddenInput(),
         ),
         FieldPanel("qr_code_eps"),

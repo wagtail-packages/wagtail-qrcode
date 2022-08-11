@@ -9,12 +9,9 @@
             {% endif %}
             {% block form_field %}
                 {{ field|render_with_errors }}
+                <h3 style="font-size:300%">{{ field.value|safe }}</h3>
             {% endblock %}
             
-            <h1 style="font-size:300%">
-            {{ field.value|safe }}
-            </h1>
-
             {# This span only used on rare occasions by certain types of input #}
             <span></span>
         </div>
