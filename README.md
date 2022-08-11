@@ -163,7 +163,7 @@ You can use the commands in the Make file to conveniently run various commands.
 - `make test` to run the django tests
 - `make lint` to run pre-commit --all-files
 - `make coverage` to run a coverage report
-- `make mail` to run a docker container for `MailHog`
+- `make mail` to run a docker container for `MailHog` [docs](docs/mailhog.md)
 
 Although it's not required as the sandbox app and temp files and folders created during testing are ignored by git you can remove these by running.
 
