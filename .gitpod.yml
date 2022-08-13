@@ -3,10 +3,10 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - command:
-      poetry install
-      poetry shell
-      develop
+  - command: >
+      poetry install &&
+      poetry shell &&
+      develop &&
       make all
 
 
