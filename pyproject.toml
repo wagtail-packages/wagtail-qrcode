@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wagtail_qrcode"
-version = "0.1.0"
+version = "0.1.1"
 description = "Create a QR code that can be used to link to a wagtail page"
 authors = ["Nick Moreton"]
 repository = "https://github.com/nickmoreton/wagtail-qrcode"
