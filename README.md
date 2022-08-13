@@ -4,11 +4,11 @@ This package can be used to create a page in Wagtail CMS that has a correspondin
 
 ![Alt text](docs/sample.jpg?raw=true "Title")
 
-The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page via the page ID
+## Features
 
-You can download the generated QR code and use it in printed advertising like posters, postcards, banners, beer mats and more.
-
-When saving a draft or publishing a page you can add a one-time email address to send the qr-code to as an attachment.
+- The generated QR Code is saved as an EPS document that can be printed then scanned and will link to the page via the page ID
+- You can download the generated QR code and use it in printed advertising like posters, postcards, banners, beer mats and more.
+- When saving a draft or publishing a page you can add a one-time email address to send the qr-code to as an attachment.
 
 ## Installation
 
@@ -44,8 +44,7 @@ Use the model mixin in a new or an existing page model.
 
 ```python
 
-from wagtail.admin.edit_handlers import TabbedInterface, ObjectList # Wagtail <= 2.*.*
-from wagtail.admin.panels import TabbedInterface, ObjectList # Wagtail >= 3.*.*
+from wagtail.admin.panels import TabbedInterface, ObjectList
 
 from wagtail_qrcode.models import QRCodeMixin
 
@@ -112,67 +111,8 @@ WAGTAIL_QR_CODE={
 
 ## Contributing
 
-Development setup
+If you would like to suggest an improvement to the package we welcome [contributions](docs/contrubute.md)
 
-**First clone this repo to your computer.**
+## Issues
 
-```bash
-git clone https://github.com/nickmoreton/wagtail-qrcode
-```
-
-### Poetry environnment
-
-**Use [Poetry](https://python-poetry.org) for dependency installation & environment management.**
-
-```bash
-poetry install
-poetry shell
-```
-
-**Create the development app** (requires poetry environment ^^ to be activated) run the poetry script
-
-```bash
-develop
-```
-
-To build a development app run
-
-```bash
-make all
-```
-
-To run the development app
-
-```bash
-make run
-```
-
-This will create a Wagtail app that can be used to develop the package. The app can be viewed at <http://localhost:8000>
-
-You can log into the admin at <http://localhost:8000/admin> and use `admin` for the username & `changeme` for the password.
-
-### Other commands
-
-You can use the commands in the Make file to conveniently run various commands.
-
-- `make migrate` run migrations
-- `make run` run the development server
-- `make test` run the tests
-- `make admin` to quickly setup a superuser account with the above login details.
-- `make run` to run the django development server
-- `make test` to run the django tests
-- `make lint` to run pre-commit --all-files
-- `make coverage` to run a coverage report
-- `make mail` to run a [docker container](docs/mailhog.md) for `MailHog`
-
-Although it's not required as the sandbox app and temp files and folders created during testing are ignored by git you can remove these by running.
-
-```bash
-clean
-```
-
-## Testing
-
-The app has django tests and has `tox` setup for running them against the compatible Wagtail and Django versions.
-
-Tox is also run when pushing branches to GitHub in the GitHub actions scripts.
+If you find an issue or error please consider [raising and issue](https://github.com/nickmoreton/wagtail-qrcode/issues)
