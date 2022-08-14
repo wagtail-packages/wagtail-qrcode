@@ -37,16 +37,6 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "qr_code_eps_email",
-                    models.EmailField(
-                        blank=True,
-                        help_text="The email address will not be saved to the database and is used only once to send the EPS file.",
-                        max_length=254,
-                        null=True,
-                        verbose_name="QR Code EPS Email",
-                    ),
-                ),
-                (
                     "qr_code_usage",
                     models.IntegerField(
                         default=0,

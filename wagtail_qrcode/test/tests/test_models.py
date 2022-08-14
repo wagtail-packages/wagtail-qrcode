@@ -12,9 +12,8 @@ class TestModels(TestCase):
 
         self.assertTrue(hasattr(test_page, "qr_code_svg"))
         self.assertTrue(hasattr(test_page, "qr_code_eps"))
-        self.assertTrue(hasattr(test_page, "qr_code_eps_email"))
         self.assertTrue(hasattr(test_page, "qr_code_usage"))
 
         panels = test_page.panels
 
-        self.assertTrue(len(panels) >= 4)
+        self.assertTrue(len(panels) >= 3)
