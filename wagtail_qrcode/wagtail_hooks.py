@@ -26,24 +26,26 @@ def generate_qr_code(request, page):
     page.qr_code_svg = svg
     page.qr_code_eps = document
 
-    if page.qr_code_eps_email is not None:
-        send_qr_code_email(page)
-        page.qr_code_eps_email = ""
-
     rev = page.save_revision()
     rev.publish()
 
 
-def send_qr_code_email(page):
+def send_qr_code_email(page, email=None, subject=None, body=None):
     """Send the QR code to the email address."""
     # need to add some error logging here
     # see mailhog `jim` setting, he messes things up and make errors fo you.
     doc = page.qr_code_eps
-    email = page.qr_code_eps_email
+    if doc is None or email is None:
+        return
+
+    if subject is None:
+        subject = f"QR Code for {page.title}"
+    if body is None:
+        body = f"QR Code for {page.title}"
 
     email = EmailMessage(
-        subject=f"QR Code for {page.title}",
-        body=f"QR Code for {page.title}",
+        subject=subject,
+        body=body,
         from_email=settings.DEFAULT_FROM_EMAIL,
         to=[email],
         attachments=[("qr-code-{}.eps".format(page.id), doc.file.read(), "image/eps")],

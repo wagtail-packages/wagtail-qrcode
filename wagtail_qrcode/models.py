@@ -3,9 +3,9 @@ from django.db import models
 from wagtail import VERSION as WAGTAIL_VERSION
 
 if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+    from wagtail.admin.panels import FieldPanel
 else:
-    from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+    from wagtail.admin.edit_handlers import FieldPanel
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
@@ -33,13 +33,6 @@ class QRCodeMixin(models.Model):
         on_delete=models.SET_NULL,
     )
 
-    qr_code_eps_email = models.EmailField(
-        verbose_name="QR Code EPS Email",
-        blank=True,
-        null=True,
-        help_text="The email address will not be saved to the database and is used only once to send the EPS file.",
-    )
-
     qr_code_usage = models.IntegerField(
         verbose_name="QR Code Usage Count",
         default=0,
@@ -58,10 +51,4 @@ class QRCodeMixin(models.Model):
             widget=forms.HiddenInput(),
         ),
         FieldPanel("qr_code_eps"),
-        MultiFieldPanel(
-            [
-                FieldPanel("qr_code_eps_email"),
-            ],
-            heading="Email address to send the QR code EPS file to",
-        ),
     ]

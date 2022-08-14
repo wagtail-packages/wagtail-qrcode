@@ -24,7 +24,6 @@ class TestWagtailHooks(TestCase):
 
         self.assertEqual(page.qr_code_svg, None)
         self.assertEqual(page.qr_code_eps, None)
-        self.assertEqual(page.qr_code_eps_email, None)
         self.assertEqual(page.qr_code_usage, 0)
 
         root_page = Page.objects.get(id=1)
@@ -40,20 +39,23 @@ class TestWagtailHooks(TestCase):
 
         self.assertEqual(test_page.qr_code_svg[:4], "<svg")
         self.assertEqual(test_page.qr_code_eps.id, 1)
-        self.assertEqual(test_page.qr_code_eps_email, None)
         self.assertEqual(test_page.qr_code_usage, 0)
 
-        test_page.qr_code_eps_email = "test@test.com"
         rev = test_page.save_revision()
         rev.publish()
 
-        send_qr_code_email(test_page)
+        send_qr_code_email(
+            test_page,
+            email="foo@bar.com",
+            subject="QR Code for Test Page",
+            body="QR Code for Test Page",
+        )
 
         self.assertEqual(len(mail.outbox), 1)
         self.assertEqual(mail.outbox[0].subject, "QR Code for Test Page")
         self.assertEqual(mail.outbox[0].body, "QR Code for Test Page")
         self.assertEqual(mail.outbox[0].from_email, settings.DEFAULT_FROM_EMAIL)
-        self.assertEqual(mail.outbox[0].to, ["test@test.com"])
+        self.assertEqual(mail.outbox[0].to, ["foo@bar.com"])
         self.assertEqual(
             mail.outbox[0].attachments[0][0], "qr-code-{}.eps".format(test_page.id)
         )
