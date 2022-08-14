@@ -3,9 +3,10 @@ from django.db import models
 from wagtail import VERSION as WAGTAIL_VERSION
 
 if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.admin.panels import FieldPanel
+    from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 else:
-    from wagtail.admin.edit_handlers import FieldPanel
+    from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+    from wagtail.documents.edit_handlers import DocumentChooserPanel
 
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
@@ -41,6 +42,11 @@ class QRCodeMixin(models.Model):
     class Meta:
         abstract = True
 
+    if WAGTAIL_VERSION >= (3, 0):
+        eps_panel = FieldPanel("qr_code_eps")
+    else:
+        eps_panel = DocumentChooserPanel("qr_code_eps")
+
     panels = [
         QrCodeFieldPanel(
             "qr_code_svg",
@@ -50,5 +56,11 @@ class QRCodeMixin(models.Model):
             "qr_code_usage",
             widget=forms.HiddenInput(),
         ),
-        FieldPanel("qr_code_eps"),
+        eps_panel,
+        MultiFieldPanel(
+            [
+                FieldPanel("qr_code_eps_email"),
+            ],
+            heading="Email address to send the QR code EPS file to",
+        ),
     ]
