@@ -1,5 +1,10 @@
 # Wagtail QRcode Changelog
 
+## [0.1.3] - 2022-08-14
+
+- [Add more options around emailing EPS](https://github.com/nickmoreton/wagtail-qrcode/pull/19)
+- [Improve documentation](https://github.com/nickmoreton/wagtail-qrcode/pull/18)
+
 ## [0.1.2] - 2022-08-12
 
 Correct version
