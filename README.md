@@ -43,22 +43,41 @@ WAGTAIL_QR_CODE_BASE_URL = "your-site-url"
 Use the model mixin in a new or an existing page model.
 
 ```python
+from wagtail.admin.panels import (
+    FieldPanel,
+    MultiFieldPanel,
+    ObjectList,
+    TabbedInterface,
+)
+from wagtail.models import Page
 
-from wagtail.admin.panels import TabbedInterface, ObjectList
-
+from wagtail_qrcode.admin_forms import QrCodeEmailForm
 from wagtail_qrcode.models import QRCodeMixin
 
+
 class QRCodePage(QRCodeMixin, Page):
-    # your model fields ...
+
+    qrcode_panels = QRCodeMixin.panels + [
+        MultiFieldPanel(
+            [
+                FieldPanel("email_address"),
+                FieldPanel("email_subject"),
+                FieldPanel("email_body"),
+            ],
+            heading="Send QR code via email",
+        )
+    ]
 
     edit_handler = TabbedInterface(
         [
             ObjectList(Page.content_panels, heading="Content"),
             ObjectList(Page.promote_panels, heading="Promote"),
             ObjectList(Page.settings_panels, heading="Settings", classname="settings"),
-            ObjectList(QRCodeMixin.panels, heading="QR Code", classname="qr-code"),
+            ObjectList(qrcode_panels, heading="QR Code", classname="qr-code"),
         ]
     )
+
+    base_form_class = QrCodeEmailForm
 ```
 
 This will add a new tab in the page editor `QR Code` where you can preview the generated QR code and access the downloadable print ready EPS file. (the file can also be found in the documents app)
@@ -97,7 +116,7 @@ Set the configuration (optional, these are the defaults)
 WAGTAIL_QR_CODE={
     "collection_name": "QR Codes",
     "scale": 3,
-    "quite_zone": 6,
+    "quiet_zone": 6,
     "svg_has_xml_declaration": False,
     "svg_has_doc_type_declaration": False,
 }
@@ -105,7 +124,7 @@ WAGTAIL_QR_CODE={
 
 - collection_name: is automatically created and used as the collection for all generated QR codes
 - scale: the size of the dots in the QR code
-- quite_zone: the plain border around the QR code
+- quiet_zone: the plain border around the QR code
 - svg_has_xml_declaration: does the QR code SVG have an XML declaration
 - svg_has_doc_type_declaration: does the QR code SVG have an HTML doc-type
 
