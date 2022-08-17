@@ -1,5 +1,9 @@
 # Wagtail QRcode Changelog
 
+## [0.1.4] - 2022-08-17
+
+- [Change admin form and misc. improvements](https://github.com/nickmoreton/wagtail-qrcode/pull/23)
+
 ## [0.1.3] - 2022-08-14
 
 - [Add more options around emailing EPS](https://github.com/nickmoreton/wagtail-qrcode/pull/19)
