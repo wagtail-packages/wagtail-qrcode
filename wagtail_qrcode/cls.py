@@ -31,7 +31,7 @@ class WagtailQrCode:
             return {
                 "collection_name": "QR Codes",
                 "scale": 3,
-                "quite_zone": 6,
+                "quiet_zone": 6,
                 "svg_has_xml_declaration": False,
                 "svg_has_doc_type_declaration": False,
             }
@@ -65,7 +65,7 @@ class WagtailQrCode:
         qrc.svg(
             svg_io,
             scale=self.settings["scale"],
-            quiet_zone=self.settings["quite_zone"],
+            quiet_zone=self.settings["quiet_zone"],
             xmldecl=self.settings["svg_has_xml_declaration"],
             svgns=self.settings["svg_has_doc_type_declaration"],
             title=self.page.title,
@@ -79,7 +79,7 @@ class WagtailQrCode:
         qrc.eps(
             eps_io,
             scale=self.settings["scale"],
-            quiet_zone=self.settings["quite_zone"],
+            quiet_zone=self.settings["quiet_zone"],
         )
 
         return eps_io

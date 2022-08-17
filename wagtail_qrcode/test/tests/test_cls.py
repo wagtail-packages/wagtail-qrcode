@@ -34,8 +34,8 @@ class TestWagtailQrCode(TestCase):
         instance = WagtailQrCode(self.test_page)
         self.assertIsInstance(instance.settings["scale"], int)
         self.assertEqual(instance.settings["scale"], 3)
-        self.assertIsInstance(instance.settings["quite_zone"], int)
-        self.assertEqual(instance.settings["quite_zone"], 6)
+        self.assertIsInstance(instance.settings["quiet_zone"], int)
+        self.assertEqual(instance.settings["quiet_zone"], 6)
         self.assertIsInstance(instance.settings["svg_has_xml_declaration"], bool)
         self.assertEqual(instance.settings["svg_has_xml_declaration"], False)
         self.assertIsInstance(instance.settings["svg_has_doc_type_declaration"], bool)
@@ -46,7 +46,7 @@ class TestWagtailQrCode(TestCase):
     @override_settings(
         WAGTAIL_QR_CODE={
             "scale": 1,
-            "quite_zone": 2,
+            "quiet_zone": 2,
             "svg_has_xml_declaration": True,
             "svg_has_doc_type_declaration": True,
         }
@@ -55,8 +55,8 @@ class TestWagtailQrCode(TestCase):
         instance = WagtailQrCode(self.test_page)
         self.assertIsInstance(instance.settings["scale"], int)
         self.assertEqual(instance.settings["scale"], 1)
-        self.assertIsInstance(instance.settings["quite_zone"], int)
-        self.assertEqual(instance.settings["quite_zone"], 2)
+        self.assertIsInstance(instance.settings["quiet_zone"], int)
+        self.assertEqual(instance.settings["quiet_zone"], 2)
         self.assertIsInstance(instance.settings["svg_has_xml_declaration"], bool)
         self.assertEqual(instance.settings["svg_has_xml_declaration"], True)
         self.assertIsInstance(instance.settings["svg_has_doc_type_declaration"], bool)
