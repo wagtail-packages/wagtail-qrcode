@@ -2,7 +2,7 @@
 
 This package can be used to create a page in Wagtail CMS that has a corresponding QR Code.
 
-![Alt text](docs/sample.jpg?raw=true "Title")
+![Alt text](docs/sample.png?raw=true "Title")
 
 ## Features
 
