@@ -1,5 +1,9 @@
 # Wagtail QRcode Changelog
 
+## Unreleased
+
+[Support Wagtail 4](https://github.com/nickmoreton/wagtail-qrcode/pull/24)
+
 ## [0.1.4] - 2022-08-17
 
 - [Change admin form and misc. improvements](https://github.com/nickmoreton/wagtail-qrcode/pull/23)
