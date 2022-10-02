@@ -71,6 +71,12 @@ def copy_files():
     subprocess.call(
         "cp bin/migrations/0003_qrcodepage.py sandbox/home/migrations/0003_qrcodepage.py".split()  # noqa: E501
     )
+    subprocess.call(
+        "cp bin/migrations/0004_alter_qrcodepage_qr_code_svg_and_more.py sandbox/home/migrations/0004_alter_qrcodepage_qr_code_svg_and_more.py".split()  # noqa: E501
+    )
+    subprocess.call(
+        "cp bin/migrations/0005_standardpage.py sandbox/home/migrations/0005_standardpage.py".split()  # noqa: E501
+    )
     subprocess.call("cp bin/models/models.py sandbox/home/models.py".split())
     subprocess.call(
         "cp bin/templates/qr_code_page.html sandbox/home/templates/home/qr_code_page.html".split()  # noqa: E501
