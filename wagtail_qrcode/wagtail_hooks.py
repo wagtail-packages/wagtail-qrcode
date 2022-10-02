@@ -17,17 +17,23 @@ from wagtail_qrcode.cls import WagtailQrCode, create_collection
 def generate_qr_code(request, page):
     """Add a QR code to the page."""
 
-    collection = create_collection("QR Codes")
+    # dont try to generate a qrcode if the page doesn't have all these fields
+    if (
+        hasattr(page, "qr_code_svg")
+        and hasattr(page, "qr_code_eps")
+        and hasattr(page, "qr_code_usage")
+    ):
+        collection = create_collection("QR Codes")
 
-    qrc = WagtailQrCode(page, collection)
+        qrc = WagtailQrCode(page, collection)
 
-    svg, document = qrc.build()
+        svg, document = qrc.build()
 
-    page.qr_code_svg = svg
-    page.qr_code_eps = document
+        page.qr_code_svg = svg
+        page.qr_code_eps = document
 
-    rev = page.save_revision()
-    rev.publish()
+        rev = page.save_revision()
+        rev.publish()
 
 
 def send_qr_code_email(page, email=None, subject=None, body=None):
