@@ -24,9 +24,9 @@ pip install wagtail-qrcode
 
 ```python
 INSTALLED_APPS = [
-    ...
+    # ...
     "wagtail_qrcode",
-    ...
+    # ...
 ]
 ```
 
@@ -90,9 +90,9 @@ The url provides the redirect endpoint for when the qr-code is scanned and viewe
 
 ```python
 urlpatterns = [
-    ...
+    # ...
     path("qr-code/", include("wagtail_qrcode.urls")),
-    ...
+    # ...
 ]
 ```
 
@@ -102,9 +102,9 @@ or import the view and pass the view in the path function
 from wagtail_qrcode.views import qr_code_page_view
 
 urlpatterns = [
-    ...
+    # ...
     path("qr-code/", qr_code_page_view, name="qr-code-view"),
-    ...
+    # ...
 ]
 ```
 
@@ -113,7 +113,7 @@ urlpatterns = [
 Set the configuration (optional, these are the defaults)
 
 ```python
-WAGTAIL_QR_CODE={
+WAGTAIL_QR_CODE = {
     "collection_name": "QR Codes",
     "scale": 3,
     "quiet_zone": 6,

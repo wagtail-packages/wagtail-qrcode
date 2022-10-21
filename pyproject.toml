@@ -33,13 +33,14 @@ PyQRCode = "^1.2.1"
 [tool.poetry.extras]
 
 [tool.poetry.dev-dependencies]
-black = "^22.6.0"
-flake8 = "^4.0.1"
-isort = "^5.10.1"
-pre-commit = "^2.20.0"
-tox = "^3.25.1"
-pymarkdownlnt = "^0.9.7"
-coverage = "^6.4.3"
+black = "22.10.0"
+flake8 = "4.0.1"
+isort = "5.10.1"
+pre-commit = "2.20.0"
+tox = "3.26.0"
+pymarkdownlnt = "0.9.8"
+coverage = "6.5.0"
+blacken-docs = "1.12.1"
 
 [build-system]
 requires = ["poetry>=1,<2"]
