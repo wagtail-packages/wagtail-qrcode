@@ -7,7 +7,7 @@ if WAGTAIL_VERSION >= (3, 0):
 else:
     from wagtail.core.models import Page
 
-from wagtail_qrcode.test.models import TestPage
+from wagtail_qrcode.test.models import QRCodePage
 from wagtail_qrcode.views import qr_code_page_view
 
 
@@ -21,7 +21,7 @@ class TestViews(TestCase):
         root_page = Page.objects.get(id=1)
         home_page = root_page.get_children().first()
 
-        test_page = TestPage(title="Test Page")
+        test_page = QRCodePage(title="Test Page")
         home_page.add_child(instance=test_page)
 
         rev = test_page.save_revision()
@@ -51,7 +51,7 @@ class TestViews(TestCase):
         root_page = Page.objects.get(id=1)
         home_page = root_page.get_children().first()
 
-        test_page = TestPage(title="Test Page")
+        test_page = QRCodePage(title="Test Page")
         home_page.add_child(instance=test_page)
 
         rev = test_page.save_revision()
@@ -60,10 +60,10 @@ class TestViews(TestCase):
         request = RequestFactory().get("?id={}".format(test_page.id))
         qr_code_page_view(request)
 
-        test_page = TestPage.objects.get(id=test_page.id)
+        test_page = QRCodePage.objects.get(id=test_page.id)
         self.assertEqual(test_page.qr_code_usage, 1)
 
         qr_code_page_view(request)
 
-        test_page = TestPage.objects.get(id=test_page.id)
+        test_page = QRCodePage.objects.get(id=test_page.id)
         self.assertEqual(test_page.qr_code_usage, 2)

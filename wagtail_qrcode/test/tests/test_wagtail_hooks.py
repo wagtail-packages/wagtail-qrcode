@@ -9,7 +9,7 @@ if WAGTAIL_VERSION >= (3, 0):
 else:
     from wagtail.core.models import Page
 
-from wagtail_qrcode.test.models import TestPage
+from wagtail_qrcode.test.models import QRCodePage
 from wagtail_qrcode.wagtail_hooks import (
     delete_document,
     generate_qr_code,
@@ -20,7 +20,7 @@ from wagtail_qrcode.wagtail_hooks import (
 class TestWagtailHooks(TestCase):
     def test_generate_qr_code(self):
         request = RequestFactory().get("/")
-        page = TestPage(title="Test Page")
+        page = QRCodePage(title="Test Page")
 
         self.assertEqual(page.qr_code_svg, None)
         self.assertEqual(page.qr_code_eps, None)
@@ -33,7 +33,7 @@ class TestWagtailHooks(TestCase):
         rev = page.save_revision()
         rev.publish()
 
-        test_page = TestPage.objects.get(id=page.id)
+        test_page = QRCodePage.objects.get(id=page.id)
 
         generate_qr_code(request, test_page)
 

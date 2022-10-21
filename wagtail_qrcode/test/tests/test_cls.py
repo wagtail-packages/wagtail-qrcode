@@ -14,7 +14,7 @@ else:
     from wagtail.core.models import Collection, Page
 
 from wagtail_qrcode.cls import WagtailQrCode, create_collection
-from wagtail_qrcode.test.models import TestPage
+from wagtail_qrcode.test.models import QRCodePage
 
 Document = get_document_model()
 
@@ -23,7 +23,7 @@ class TestWagtailQrCode(TestCase):
     def setUp(self):
         home_page = Page.objects.get(id=2)
         self.test_page = home_page.add_child(
-            instance=TestPage(
+            instance=QRCodePage(
                 title="Test Page",
             ),
         )

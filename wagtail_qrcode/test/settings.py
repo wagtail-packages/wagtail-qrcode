@@ -91,12 +91,12 @@ TEMPLATES = [
 # Using DatabaseCache to make sure that the cache is cleared between tests.
 # This prevents false-positives in some wagtail core tests where we are
 # changing the 'wagtail_root_paths' key which may cause future tests to fail.
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-        "LOCATION": "cache",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+#         "LOCATION": "cache",
+#     }
+# }
 
 
 # don't use the intentionally slow default password hasher
@@ -109,7 +109,7 @@ PASSWORD_HASHERS = ("django.contrib.auth.hashers.MD5PasswordHasher",)
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "NAME": os.path.join(BASE_DIR, "wagtail_qr_code.sqlite3"),
     }
 }
 
@@ -163,3 +163,8 @@ WAGTAIL_SITE_NAME = "Wagtail qrcode test site"
 WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 
 WAGTAIL_QR_CODE_BASE_URL = "http://localhost:8000"
+
+try:
+    from .local import *  # noqa F403 F401
+except ImportError:
+    pass

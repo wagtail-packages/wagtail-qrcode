@@ -1,11 +1,11 @@
 from django.test import TestCase
 
-from wagtail_qrcode.test.models import TestPage
+from wagtail_qrcode.test.models import QRCodePage
 
 
 class TestModels(TestCase):
     def test_qrcode_mixin(self):
-        test_page = TestPage()
+        test_page = QRCodePage()
 
         self.assertTrue(hasattr(test_page, "GENERATE_QR_CODE"))
         self.assertTrue(test_page.GENERATE_QR_CODE, True)
