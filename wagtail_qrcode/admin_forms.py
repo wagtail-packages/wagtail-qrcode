@@ -49,8 +49,6 @@ class QrCodeEmailForm(WagtailAdminPageForm):
             email_body = self.cleaned_data["email_body"]
             send_qr_code_email(page, email_address, email_subject, email_body)
 
-            print("Sending email to {}".format(self.cleaned_data["email_address"]))
-
         if commit:
             page.save()
         return page
