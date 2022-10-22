@@ -1,4 +1,4 @@
-# Wagtail qrcode
+# Wagtail QR code
 
 This package can be used to create a page in Wagtail CMS that has a corresponding QR Code.
 
@@ -124,7 +124,7 @@ class QRCodePage(QRCodeMixin, Page):
     )
 ```
 
-## Wagtail QRCode URLS
+## URLS
 
 Include the wagtail-qrcode urls in your site urls before `wagtail_urls`.
 
