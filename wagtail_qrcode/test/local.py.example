@@ -7,5 +7,5 @@ EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_TLS = False
 
 DEFAULT_FROM_EMAIL = "foo@localhost"
-
+ALLOWED_HOSTS = ["*"]
 WAGTAIL_QR_CODE_BASE_URL = "http://localhost:8000"

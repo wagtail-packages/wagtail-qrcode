@@ -126,7 +126,7 @@ class QRCodePage(QRCodeMixin, Page):
 
 ## Wagtail QRCode URLS
 
-Include the wagtail-qrcode urls in your site urls.
+Include the wagtail-qrcode urls in your site urls before `wagtail_urls`.
 
 The url provides the redirect endpoint when the qr-code is scanned and viewed in a browser.
 

@@ -10,6 +10,6 @@ urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
-    path("", include(wagtail_urls)),
     path("qr-code/", qr_code_page_view, name="qr-code-view"),
+    path("", include(wagtail_urls)),
 ]
