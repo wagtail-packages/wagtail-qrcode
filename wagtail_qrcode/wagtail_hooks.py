@@ -38,8 +38,6 @@ def generate_qr_code(request, page):
 
 def send_qr_code_email(page, email=None, subject=None, body=None):
     """Send the QR code to the email address."""
-    # need to add some error logging here
-    # see mailhog `jim` setting, he messes things up and make errors fo you.
     doc = page.qr_code_eps
     if doc is None or email is None:
         return
