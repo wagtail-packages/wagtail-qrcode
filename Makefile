@@ -19,7 +19,7 @@ test:
 
 lint:
 	@echo "Running pre-commit hooks"
-	tox -e lint
+	@pre-commit run --all-files
 
 mail:
 	@echo "Starting mail server"

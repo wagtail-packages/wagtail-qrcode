@@ -8,6 +8,6 @@ The mail-hog web interface will be available at `http://localhost:8025` **Before
 
 ## Test sending an email with attached QR code
 
-With the sandbox app set up you can access the QR code sample page in the admin and add an email address before saving the page.
+With the test app set up: create a QRCode page and on the QRcode tab complete the field to send an email you can access the QR code sample page in the admin and add an email address before saving the page.
 
 The email will show up in mail hog.
