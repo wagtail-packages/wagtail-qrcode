@@ -8,7 +8,7 @@
 git clone https://github.com/nickmoreton/wagtail-qrcode
 ```
 
-## Poetry environnment
+## Poetry environment
 
 ### Use [Poetry](https://python-poetry.org) for dependency installation & environment management
 
