@@ -162,8 +162,6 @@ WAGTAIL_SITE_NAME = "Wagtail qrcode test site"
 
 WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 
-WAGTAIL_QR_CODE_BASE_URL = "http://localhost:8000"
-
 try:
     from .local import *  # noqa F403 F401
 except ImportError:
