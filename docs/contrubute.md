@@ -8,25 +8,22 @@
 git clone https://github.com/nickmoreton/wagtail-qrcode
 ```
 
-## Poetry environment
-
-### Use [Poetry](https://python-poetry.org) for dependency installation & environment management
+## Setup a virtual environment
 
 ```bash
-poetry install
-poetry shell
+pyenv virtualenv wagtail-qrcode && pyenv activate wagtail-qrcode
+```
+
+## Install the package into your virtual environment
+
+```bash
+pip install -e ".[testing]"
 ```
 
 ## Setup the testing app
 
-requires the poetry environment ^^ to be activated
-
-To initialise the testing app run
-
 ```bash
-make migrate
-make admin
-make run
+make migrate && make admin && make run
 ```
 
 The app can be viewed at <http://localhost:8000>
