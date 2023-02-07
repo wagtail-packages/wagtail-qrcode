@@ -18,7 +18,6 @@ class QrCodeFieldPanel(FieldPanel):
             object_template_name = "wagtail_qrcode/admin/field_panel.html"
 
     else:
-
         object_template = "wagtail_qrcode/admin/field_panel.html"
 
 
@@ -34,5 +33,4 @@ class QrCodeUsageFieldPanel(FieldPanel):
             object_template_name = "wagtail_qrcode/admin/usage_field_panel.html"
 
     else:
-
         object_template = "wagtail_qrcode/admin/usage_field_panel.html"
