@@ -4,13 +4,8 @@ import tempfile
 import pyqrcode
 from django.core.files.base import File
 from django.test import TestCase, override_settings
-from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.documents import get_document_model
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.models import Collection, Page
-else:
-    from wagtail.core.models import Collection, Page
+from wagtail.models import Collection, Page
 
 from wagtail_qrcode.cls import WagtailQrCode, create_collection
 from wagtail_qrcode.test.models import QRCodePage

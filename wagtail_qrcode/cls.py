@@ -3,14 +3,9 @@ import io
 import pyqrcode
 from django.conf import settings
 from django.core.files.base import File
-from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail.models import Collection
-else:
-    from wagtail.core.models import Collection
+from wagtail.models import Collection
 
 Document = get_document_model()
 Image = get_image_model()
