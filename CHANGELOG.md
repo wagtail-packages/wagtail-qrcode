@@ -3,6 +3,7 @@
 ## Uneleased
 
 - [General tidy up around tests and docs](https://github.com/nickmoreton/wagtail-qrcode/pull/28)
+- Drop older versions
 
 ## [1.0.0] - 2022-09-09
 

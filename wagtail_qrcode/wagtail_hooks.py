@@ -1,12 +1,6 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
-from wagtail import VERSION as WAGTAIL_VERSION
-
-if WAGTAIL_VERSION >= (3, 0):
-    from wagtail import hooks
-else:
-    from wagtail.core import hooks
-
+from wagtail import hooks
 from wagtail.documents import get_document_model
 
 from wagtail_qrcode.cls import WagtailQrCode, create_collection

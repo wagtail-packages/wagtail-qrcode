@@ -42,7 +42,7 @@ setup(
         "Framework :: Wagtail :: 3",
         "Framework :: Wagtail :: 4",
     ],
-    install_requires=["Wagtail>=2.15,<5.0", "PyQRCode>=1,<2"],
+    install_requires=["Wagtail>=4.1", "PyQRCode>=1,<2"],
     extras_require={
         "testing": ["coverage"],
     },
