@@ -7,8 +7,8 @@ from django.test import TestCase, override_settings
 from wagtail.documents import get_document_model
 from wagtail.models import Collection, Page
 
+from tests.testapp.models import QRCodePage
 from wagtail_qrcode.cls import WagtailQrCode, create_collection
-from wagtail_qrcode.test.models import QRCodePage
 
 Document = get_document_model()
 

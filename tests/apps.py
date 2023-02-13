@@ -2,6 +2,6 @@ from django.apps import AppConfig
 
 
 class WagtailQrcodeTestAppConfig(AppConfig):
-    label = "wagtail_qrcode_test"
-    name = "wagtail_qrcode.test"
+    label = "tests"
+    name = "tests"
     verbose_name = "Wagtail qrcode tests"

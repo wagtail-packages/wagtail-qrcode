@@ -4,7 +4,7 @@ from django.test import RequestFactory, TestCase
 from wagtail.documents import get_document_model
 from wagtail.models import Page
 
-from wagtail_qrcode.test.models import QRCodePage
+from tests.testapp.models import QRCodePage
 from wagtail_qrcode.wagtail_hooks import (
     delete_document,
     generate_qr_code,
