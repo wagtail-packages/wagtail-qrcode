@@ -5,6 +5,7 @@ from wagtail.documents import get_document_model
 from wagtail.models import Page
 
 from tests.testapp.models import QRCodePage
+from wagtail_qrcode.models import QRCodeMixin
 from wagtail_qrcode.wagtail_hooks import (
     delete_document,
     generate_qr_code,
@@ -39,6 +40,21 @@ class TestWagtailHooks(TestCase):
         rev = test_page.save_revision()
         rev.publish()
 
+    def test_send_qr_code_email(self):
+        request = RequestFactory().get("/")
+        page = QRCodePage(title="Test Page")
+
+        root_page = Page.objects.get(id=1)
+        home_page = root_page.get_children().first()
+        home_page.add_child(instance=page)
+
+        rev = page.save_revision()
+        rev.publish()
+
+        test_page = QRCodePage.objects.get(id=page.id)
+
+        generate_qr_code(request, test_page)
+
         send_qr_code_email(
             test_page,
             email="foo@bar.com",
@@ -55,5 +71,68 @@ class TestWagtailHooks(TestCase):
             mail.outbox[0].attachments[0][0], "qr-code-{}.eps".format(test_page.id)
         )
 
+    def test_is_qrcode_instance(self):
+        # not inherit from QRCodeMixin
+        page = Page(title="Test Page")
+
+        home_page = Page.objects.get(id=1)
+        home_page.add_child(instance=page)
+
+        rev = page.save_revision()
+        rev.publish()
+
+        test_page = Page.objects.get(id=page.id)
+
+        self.assertNotIsInstance(test_page, QRCodeMixin)
+
+        # inherit from QRCodeMixin
+        qr_code_page = QRCodePage(title="Test Page")
+
+        home_page.add_child(instance=qr_code_page)
+
+        rev = qr_code_page.save_revision()
+        rev.publish()
+
+        test_qr_code_page = QRCodePage.objects.get(id=qr_code_page.id)
+
+        self.assertIsInstance(test_qr_code_page, QRCodeMixin)
+
+    def test_delete_document(self):
+        request = RequestFactory().get("/")
+        page = QRCodePage(title="Test Page")
+
+        root_page = Page.objects.get(id=1)
+        home_page = root_page.get_children().first()
+        home_page.add_child(instance=page)
+
+        rev = page.save_revision()
+        rev.publish()
+
+        test_page = QRCodePage.objects.get(id=page.id)
+
+        generate_qr_code(request, test_page)
+
+        self.assertEqual(test_page.qr_code_eps.id, 1)
+
         delete_document(request, test_page)
+
         self.assertEqual(get_document_model().objects.count(), 0)
+
+    def test_delete_document_not_qrcode_page(self):
+        request = RequestFactory().get("/")
+        page = Page(title="Test Page")
+
+        root_page = Page.objects.get(id=1)
+        home_page = root_page.get_children().first()
+        home_page.add_child(instance=page)
+
+        rev = page.save_revision()
+        rev.publish()
+
+        test_page = Page.objects.get(id=page.id)
+
+        result = delete_document(request, test_page)
+
+        # really should be None as the page does not inherit from QRCodeMixin
+        # and the function doesn't return anything
+        self.assertEqual(result, None)
