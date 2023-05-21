@@ -24,7 +24,9 @@ def generate_qr_code(request, page):
         page.qr_code_eps = document
 
         rev = page.save_revision()
-        rev.publish()
+
+        if page.live:
+            rev.publish()
 
 
 def send_qr_code_email(page, email=None, subject=None, body=None):
