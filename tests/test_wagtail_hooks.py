@@ -33,12 +33,12 @@ class TestWagtailHooks(TestCase):
 
         generate_qr_code(request, test_page)
 
+        rev = test_page.save_revision()
+        rev.publish()
+
         self.assertEqual(test_page.qr_code_svg[:4], "<svg")
         self.assertEqual(test_page.qr_code_eps.id, 1)
         self.assertEqual(test_page.qr_code_usage, 0)
-
-        rev = test_page.save_revision()
-        rev.publish()
 
     def test_send_qr_code_email(self):
         request = RequestFactory().get("/")
