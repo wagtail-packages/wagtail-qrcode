@@ -21,9 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python: ["3.8", "3.9", "3.10", "3.11"]
         database: ["sqlite"]
-
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python
@@ -43,9 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python: ["3.8", "3.9", "3.10", "3.11"]
         database: ["postgres"]
-
     services:
       postgres:
         image: postgres
@@ -56,7 +54,6 @@ jobs:
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -84,19 +81,17 @@ jobs:
           DB_PORT: 5432
           DATABASE: ${{ matrix.database }}
 
-
   test-mysql:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        python: ["3.8", "3.9", "3.10", "3.11"]
         database: ["mysql"]
-
     services:
       mariadb:
-        image: mariadb
+        image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: mysql
+          MYSQL_ROOT_PASSWORD: root
         options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s
@@ -104,7 +99,6 @@ jobs:
           --health-retries 5
         ports:
         - 3306:3306
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -125,9 +119,9 @@ jobs:
         run: |
           tox
         env:
-          DB_NAME: mysql
+          DB_NAME: test
           DB_USER: root
-          DB_PASSWORD: mysql
+          DB_PASSWORD: root
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
           DATABASE: ${{ matrix.database }}
