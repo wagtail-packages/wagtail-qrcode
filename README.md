@@ -68,7 +68,6 @@ from wagtail_qrcode.models import QRCodeMixin
 
 
 class QRCodePage(QRCodeMixin, Page):
-
     qrcode_panels = QRCodeMixin.panels + [
         MultiFieldPanel(
             [
@@ -111,7 +110,6 @@ from wagtail_qrcode.models import QRCodeMixin
 
 
 class QRCodePage(QRCodeMixin, Page):
-
     qrcode_panels = QRCodeMixin.panels
 
     edit_handler = TabbedInterface(
