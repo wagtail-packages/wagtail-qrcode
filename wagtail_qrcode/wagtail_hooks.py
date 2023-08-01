@@ -4,6 +4,7 @@ from wagtail import hooks
 from wagtail.documents import get_document_model
 
 from wagtail_qrcode.cls import WagtailQrCode, create_collection
+from wagtail_qrcode.models import QRCodeMixin
 
 
 @hooks.register("after_create_page")
@@ -11,12 +12,8 @@ from wagtail_qrcode.cls import WagtailQrCode, create_collection
 def generate_qr_code(request, page):
     """Add a QR code to the page."""
 
-    # dont try to generate a qrcode if the page doesn't have all these fields
-    if (
-        hasattr(page, "qr_code_svg")
-        and hasattr(page, "qr_code_eps")
-        and hasattr(page, "qr_code_usage")
-    ):
+    # dont try to generate a qrcode if the page does not inherit from QRCodeMixin
+    if is_qrcode_instance(page):
         collection = create_collection("QR Codes")
 
         qrc = WagtailQrCode(page, collection)
@@ -27,7 +24,9 @@ def generate_qr_code(request, page):
         page.qr_code_eps = document
 
         rev = page.save_revision()
-        rev.publish()
+
+        if page.live:
+            rev.publish()
 
 
 def send_qr_code_email(page, email=None, subject=None, body=None):
@@ -56,6 +55,12 @@ def send_qr_code_email(page, email=None, subject=None, body=None):
 
 @hooks.register("after_delete_page")
 def delete_document(request, page):
-    doc = get_document_model().objects.filter(id=page.qr_code_eps.id)
-    if doc:
-        doc.delete()
+    if is_qrcode_instance(page):
+        doc = get_document_model().objects.filter(id=page.qr_code_eps.id)
+        if doc:
+            doc.delete()
+
+
+def is_qrcode_instance(page):
+    """Check if the page is a QR code page and inherits from the QRCodeMixin"""
+    return isinstance(page, QRCodeMixin)
