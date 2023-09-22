@@ -8,7 +8,7 @@
 git clone https://github.com/nickmoreton/wagtail-qrcode
 ```
 
-## Setup a virtual environment
+## Setup a virtual environment (poetry)
 
 ```bash
 pyenv virtualenv wagtail-qrcode && pyenv activate wagtail-qrcode
