@@ -11,13 +11,7 @@ git clone https://github.com/nickmoreton/wagtail-qrcode
 ## Setup a virtual environment (poetry)
 
 ```bash
-pyenv virtualenv wagtail-qrcode && pyenv activate wagtail-qrcode
-```
-
-## Install the package into your virtual environment
-
-```bash
-pip install -e ".[testing]"
+poetry install && poetry shell
 ```
 
 ## Setup the testing app
