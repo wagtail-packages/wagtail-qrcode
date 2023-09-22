@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Use poetry for packaging
+- Fixes mail hog setup
+- Add support for Wagtail 5.1
 
 ## [2.0.0] - 2023-08-01
 
