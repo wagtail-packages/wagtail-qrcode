@@ -19,7 +19,7 @@ test:
 
 mail:
 	@echo "Starting mail server"
-	@cp wagtail_qrcode/test/local.py.example wagtail_qrcode/test/local.py
+	@cp tests/local.py.example tests/local.py
 	@docker run -d -p 8025:8025 -p 1025:1025 --name mailhog mailhog/mailhog
 	@make run
 
