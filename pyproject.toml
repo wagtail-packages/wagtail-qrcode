@@ -1,3 +1,40 @@
+[tool.poetry]
+name = "wagtail-qrcode"
+version = "2.0.0"
+description = "Create a QR code that can be used to link to a wagtail page"
+authors = [
+  "Nick Moreton <nickmoreton@me.com>",
+]
+readme = "README.md"
+license="MIT"
+classifiers=[
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Framework :: Wagtail",
+    "Framework :: Wagtail :: 4",
+    "Framework :: Wagtail :: 5",
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+wagtail = ">=4.1,<5.2"
+pyqrcode = ">=1,<2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 line-length = 88
 target-version = ['py39']
