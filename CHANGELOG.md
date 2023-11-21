@@ -1,10 +1,13 @@
 # Wagtail QRcode Changelog
 
-## Uneleased
+## Unreleased
+
+## [2.0.0] - 2023-08-01
 
 - [General tidy up around tests and docs](https://github.com/nickmoreton/wagtail-qrcode/pull/28)
 - Drop older versions
 - Move tests and tes with postgres and mysql as well as sqlite
+- Test against wagtail 5.0 <https://github.com/thepubclub/wagtail-qrcode/pull/42>
 
 ## [1.0.0] - 2022-09-09
 
