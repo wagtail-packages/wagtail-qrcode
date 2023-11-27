@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add testing for Wagtail 5.2
+
 ## [2.0.0] - 2023-08-01
 
 - [General tidy up around tests and docs](https://github.com/nickmoreton/wagtail-qrcode/pull/28)
