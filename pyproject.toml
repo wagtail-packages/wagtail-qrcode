@@ -1,3 +1,55 @@
+[project]
+name = "wagtail-qrcode"
+version = "2.1.0"
+description = "Create a QR code that can be used to link to a wagtail page"
+readme = "README.md"
+keywords = ["wagtail", "qrcode"]
+authors = [
+    {name = "Nick Moreton", email = "nickmoreton@me.com"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Framework :: Django",
+  "Framework :: Django :: 3.2",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Wagtail",
+  "Framework :: Wagtail :: 4",
+  "Framework :: Wagtail :: 5",
+  "Framework :: Wagtail :: 6",
+]
+requires-python = ">=3.9"
+dependencies =[
+    "Wagtail>=4.1",
+    "PyQRCode>=1,<2"
+]
+
+[project.optional-dependencies]
+development = [
+    "black==24.4.2",
+    "flake8==7.1.0",
+    "isort==5.13.0",
+]
+testing = [
+  "coverage"
+]
+
+[project.urls]
+Repository = "https://github.com/wagtail-packages/wagtail-qrcode"
+Issues = "https://github.com/wagtail-packages/wagtail-qrcode/issues"
+Changelog = "https://github.com/wagtail-packages/wagtail-qrcode/blob/release/CHANGELOG.md"
+
+
 [tool.black]
 line-length = 88
 target-version = ['py39']

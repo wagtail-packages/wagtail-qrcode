@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [2.1.0] - 2024-07-14
+
+- Add testing for Wagtail 5.2 & 6.0
+- Add testing for Django 5.0
+- Add testing for Python 3.12
+
 ## [2.0.0] - 2023-08-01
 
 - [General tidy up around tests and docs](https://github.com/nickmoreton/wagtail-qrcode/pull/28)

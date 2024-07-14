@@ -11,13 +11,14 @@ git clone https://github.com/nickmoreton/wagtail-qrcode
 ## Setup a virtual environment
 
 ```bash
-pyenv virtualenv wagtail-qrcode && pyenv activate wagtail-qrcode
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 ## Install the package into your virtual environment
 
 ```bash
-pip install -e ".[testing]"
+pip install -e ".[development,testing]"
 ```
 
 ## Setup the testing app
