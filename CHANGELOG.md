@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- Add testing for Wagtail 5.2
+- Add testing for Wagtail 5.2 & 6.0
+- Add testing for Django 5.0
+- Add testing for Python 3.12
 
 ## [2.0.0] - 2023-08-01
 

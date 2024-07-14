@@ -26,10 +26,11 @@ classifiers = [
   "Framework :: Wagtail",
   "Framework :: Wagtail :: 4",
   "Framework :: Wagtail :: 5",
+  "Framework :: Wagtail :: 6",
 ]
 requires-python = ">=3.9"
 dependencies =[
-    "Wagtail>=4.1,<5.3",
+    "Wagtail>=4.1",
     "PyQRCode>=1,<2"
 ]
 
