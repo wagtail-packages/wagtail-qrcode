@@ -55,7 +55,7 @@ def send_qr_code_email(page, email=None, subject=None, body=None):
 
 @hooks.register("after_delete_page")
 def delete_document(request, page):
-    if is_qrcode_instance(page):
+    if is_qrcode_instance(page) and page.qr_code_eps:
         doc = get_document_model().objects.filter(id=page.qr_code_eps.id)
         if doc:
             doc.delete()
