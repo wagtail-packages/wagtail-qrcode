@@ -4,7 +4,12 @@ from wagtail.models import Page
 
 def qr_code_page_view(request):
     """QR code redirect view."""
-    page_id = int(request.GET.get("id"))
+    try:
+        page_id = int(request.GET.get("id"))
+    except ValueError:
+        raise Http404
+    except TypeError:
+        raise Http404
 
     try:
         specific_cls = Page.objects.get(id=page_id).specific_class
