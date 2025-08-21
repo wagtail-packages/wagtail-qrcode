@@ -25,6 +25,12 @@ def generate_qr_code(request, page):
 
         rev = page.save_revision()
 
+        if (
+            page.live
+            and getattr(settings, "WAGTAIL_QR_CODE_AUTO_PUBLISH_UPDATES", False) == True
+        ):
+            rev.publish()
+
 
 def send_qr_code_email(page, email=None, subject=None, body=None):
     """Send the QR code to the email address."""
