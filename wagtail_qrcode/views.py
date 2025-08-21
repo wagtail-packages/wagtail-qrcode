@@ -15,6 +15,5 @@ def qr_code_page_view(request):
     if hasattr(page, "qr_code_usage"):
         page.qr_code_usage += 1
         page.save()
-        return HttpResponseRedirect(page.url)
-    else:
-        raise Http404
+
+    return HttpResponseRedirect(page.url)
