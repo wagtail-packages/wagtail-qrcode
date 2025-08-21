@@ -25,11 +25,6 @@ def generate_qr_code(request, page):
 
         rev = page.save_revision()
 
-        print("generate_qr_code")
-
-        # if page.live:
-        #     rev.publish()
-
 
 def send_qr_code_email(page, email=None, subject=None, body=None):
     """Send the QR code to the email address."""
