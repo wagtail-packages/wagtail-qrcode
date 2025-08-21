@@ -27,7 +27,7 @@ def generate_qr_code(request, page):
 
         if (
             page.live
-            and getattr(settings, "WAGTAIL_QR_CODE_AUTO_PUBLISH_UPDATES", False) == True
+            and getattr(settings, "WAGTAIL_QR_CODE_AUTO_PUBLISH_UPDATES", False) is True
         ):
             rev.publish()
 
