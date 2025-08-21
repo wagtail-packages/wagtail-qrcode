@@ -25,7 +25,10 @@ def generate_qr_code(request, page):
 
         rev = page.save_revision()
 
-        if page.live:
+        if (
+            page.live
+            and getattr(settings, "WAGTAIL_QR_CODE_AUTO_PUBLISH_UPDATES", False) is True
+        ):
             rev.publish()
 
 
