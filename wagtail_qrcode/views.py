@@ -1,20 +1,23 @@
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from wagtail.models import Page
 
 
 def qr_code_page_view(request):
     """QR code redirect view."""
-    page_id = int(request.GET.get("id"))
+    try:
+        page_id = int(request.GET.get("id"))
+    except ValueError:
+        raise Http404("Page ID not valid, incorrect value")
+    except TypeError:
+        raise Http404("Page ID not present, incorrect type")
 
     try:
-        specific_cls = Page.objects.get(id=page_id).specific_class
-        page = specific_cls.objects.get(id=page_id)
+        page = Page.objects.get(id=page_id).specific
     except Page.DoesNotExist:
-        return HttpResponseNotFound("Page not found")
+        raise Http404
 
     if hasattr(page, "qr_code_usage"):
         page.qr_code_usage += 1
         page.save()
-        return HttpResponseRedirect(page.url)
 
-    return HttpResponseNotFound("Page not found")
+    return HttpResponseRedirect(page.url)
