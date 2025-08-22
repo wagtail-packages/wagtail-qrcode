@@ -12,8 +12,7 @@ def qr_code_page_view(request):
         raise Http404
 
     try:
-        specific_cls = Page.objects.get(id=page_id).specific_class
-        page = specific_cls.objects.get(id=page_id)
+        page = Page.objects.get(id=page_id).specific()
     except Page.DoesNotExist:
         raise Http404
 
