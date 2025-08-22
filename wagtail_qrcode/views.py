@@ -7,9 +7,9 @@ def qr_code_page_view(request):
     try:
         page_id = int(request.GET.get("id"))
     except ValueError:
-        raise Http404
+        raise Http404("Page ID not valid, incorrect value")
     except TypeError:
-        raise Http404
+        raise Http404("Page ID not present, incorrect type")
 
     try:
         page = Page.objects.get(id=page_id).specific
